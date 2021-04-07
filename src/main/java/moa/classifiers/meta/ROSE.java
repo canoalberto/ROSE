@@ -25,7 +25,7 @@ import moa.evaluation.WindowImbalancedClassificationPerformanceEvaluator;
 import moa.options.ClassOption;
 
 /**
- * ROSE: Robust Online Self-Adjusting Ensemble for ImbalancedDrifting Data Streams
+ * ROSE: Robust Online Self-Adjusting Ensemble for Imbalanced Drifting Data Streams
  * 
  * @author Alberto Cano
  */
