@@ -7,7 +7,7 @@
 	<artifactId>ROSE</artifactId>
 	<version>1.0</version>
 
-	<name>Robust Online Self-Adjusting Ensemble for Imbalanced Drifting Data Streams</name>
+	<name>ROSE: Robust Online Self-Adjusting Ensemble for Continual Learning on Imbalanced Drifting Data Streams</name>
 	<url>https://github.com/canoalberto/ROSE</url>
 
 	<organization>
