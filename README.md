@@ -50,15 +50,16 @@ java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0-jar-with-dependencies.jar moa.Do
 | electricity | 45312 | 8 | 2 |
 | fars | 100968 | 29 | 8 |
 | gas-sensor | 13910 | 128 | 6 |
+| gmsc | 150000 | 10 | 2 |
+| intel-lab | 2313153 | 5 | 58 |
+| kddcup | 4898431 | 41 | 23 |
 | kr-vs-k | 28056 | 6 | 18 |
 | letter | 20000 | 16 | 26 |
 | magic | 19020 | 10 | 2 |
+| nomao | 34465 | 118 | 2 |
 | penbased | 10992 | 16 | 10 |
 | poker | 829201 | 10 | 10 |
 | powersupply | 29928 | 2 | 24 |
 | shuttle | 57999 | 9 | 7 |
 | thyroid | 7200 | 21 | 3 |
 | zoo | 1000000 | 17 | 7 |
-
-
-
