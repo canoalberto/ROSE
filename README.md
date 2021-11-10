@@ -13,14 +13,13 @@ java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0-jar-with-dependencies.jar moa.Do
 ```
 
  | Generator | Instances | Features | Classes | Static Imbalance Ratios | Concept Drift | 
- | -------- | ---: | ---: | ---: |---: |---: |
+ | -------- | ---: | ---: | ---: |:-: |:-: |
  | Agrawal | 1,000,000 | 9 | 2 | {5, 10, 20, 50, 100} | None | 
  | AssetNegotiation | 1,000,000 | 5 | 2 | {5, 10, 20, 50, 100} | None | 
  | RandomRBF | 1,000,000 | 10 | 2 | {5, 10, 20, 50, 100} | None | 
  | SEA | 1,000,000 | 3 | 2 | {5, 10, 20, 50, 100} | None | 
  | Sine | 1,000,000 | 4 | 2 | {5, 10, 20, 50, 100} | None | 
- | Hyperplane | 1,000,000 | 10 | 2 | {5, 10, 20, 50, 100} | None | 
- | RandomRBFDrift | 1,000,000 | 10 | 2 | {5, 10, 20, 50, 100} | None | 
+ | Hyperplane | 1,000,000 | 10 | 2 | {5, 10, 20, 50, 100} | None |
 
 ### Experiment 2: Drifting imbalance ratio
 Use any algorithm in `moa.classifiers` and imbalanced generator in `moa.streams.generators.imbalanced`. The parameter `-m` controls the proportion of the minority vs majority class, e.g. `-m 0.01` reflects an imbalance ratio of 100. Generate drifting imbalance ratios by chaining `ConceptDriftStream` streams with different imbalance ratios. The parameter `-p` controls the position of the drift and `-w` the width of the drift (sudden vs gradual). The example shows a sequence of increasing then decreasing imbalance ratio (5 - 10 - 20 - 100 - 20 - 10 - 5).
@@ -29,16 +28,13 @@ java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0-jar-with-dependencies.jar moa.Do
 ```
 
  | Generator | Instances | Features | Classes | Drifting imbalance ratios | Concept Drift | 
- | -------- | ---: | ---: | ---: |---: |---: |
- | Agrawal | 1,000,000 | 9 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | 
- | AssetNegotiation | 1,000,000 | 5 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | 
- | RandomRBF | 1,000,000 | 10 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | 
- | RandomTree | 1,000,000 | 10 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | 
- | SEA | 1,000,000 | 3 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | 
- | STAGGER | 1,000,000 | 3 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | 
- | Sine | 1,000,000 | 4 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | 
- | Hyperplane | 1,000,000 | 10 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | 
- | RandomRBFDrift | 1,000,000 | 10 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | 
+ | -------- | ---: | ---: | ---: |:-: |:-: |
+ | Agrawal | 1,000,000 | 9 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | 
+ | AssetNegotiation | 1,000,000 | 5 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | 
+ | RandomRBF | 1,000,000 | 10 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | 
+ | SEA | 1,000,000 | 3 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | 
+ | Sine | 1,000,000 | 4 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | 
+ | Hyperplane | 1,000,000 | 10 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | 
 
 ### Experiment 3: Instance-level difficulties
 Use any algorithm in `moa.classifiers` and [dataset for instance-level difficulties](http://people.vcu.edu/~acano/ROSE/datasets-instance-level.zip) generated using these [imbalanced generators](https://github.com/dabrze/imbalanced-stream-generator)
@@ -48,10 +44,10 @@ java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0-jar-with-dependencies.jar moa.Do
 ```
 
  | Generator | Instances | Features | Classes | Static Imbalance Ratios | Percentage of difficult instances | 
- | -------- | ---: | ---: | ---: |---: |---: |
+ | -------- | ---: | ---: | ---: |:-: |:-- |
  | Borderline | 200,000 | 5 | 2 | {1, 10, 100} | {0%, 20%, 40%, 60%, 80%, 100%} | 
  | Rare | 200,000 | 5 | 2 | {1, 10, 100} | {0%, 20%, 40%, 60%, 80%, 100%} | 
- | Borderline + rare | 200,000 | 5 | 2 | {1, 10, 100} | {0%, 20%, 40%} | 
+ | Borderline + Rare | 200,000 | 5 | 2 | {1, 10, 100} | {0%, 20%, 40%} | 
 
 ### Experiment 4: Robustness to noise drift
 Use any algorithm in `moa.classifiers` and imbalanced generator in `moa.streams.generators.imbalanced`. The parameter `-f` controls the percentage of features with noise. The parameter `-m` controls the proportion of the minority vs majority class, e.g. `-m 0.01` reflects an imbalance ratio of 100. Generate drifting noise and imbalance ratios by chaining `ConceptDriftStream` streams with different imbalance ratios, percentages of features with noise, and noise seed `-r`. The parameter `-p` controls the position of the drift and `-w` the width of the drift (sudden vs gradual). The example shows a sequence of drifting noise to other features and increasing then decreasing imbalance ratio (5 - 10 - 20 - 100 - 20 - 10 - 5).
@@ -60,17 +56,17 @@ java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0-jar-with-dependencies.jar moa.Do
 ```
 
  | Generator | Instances | Features | Classes | Drifting imbalance ratios | Concept Drift | Percentage of features with noise
- | -------- | ---: | ---: | ---: |---: |---: | ---: |
- | Agrawal | 1,000,000 | 9 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | {0%, 10%, 20%, 30%, 40%}
- | AssetNegotiation | 1,000,000 | 5 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | {0%, 10%, 20%, 30%, 40%}
- | RandomRBF | 1,000,000 | 10 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | {0%, 10%, 20%, 30%, 40%}
- | RandomTree | 1,000,000 | 10 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | {0%, 10%, 20%, 30%, 40%}
- | SEA | 1,000,000 | 3 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | {0%, 10%, 20%, 30%, 40%}
- | STAGGER | 1,000,000 | 3 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | {0%, 10%, 20%, 30%, 40%}
- | Sine | 1,000,000 | 4 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | {0%, 10%, 20%, 30%, 40%}
- | Text | 1,000,000 | 100 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | {0%, 10%, 20%, 30%, 40%}
- | Hyperplane | 1,000,000 | 10 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | {0%, 10%, 20%, 30%, 40%}
- | RandomRBFDrift | 1,000,000 | 10 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | {0%, 10%, 20%, 30%, 40%}
+ | -------- | ---: | ---: | ---: |:-: |:-: | :-- |
+ | Agrawal | 1,000,000 | 9 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
+ | AssetNegotiation | 1,000,000 | 5 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
+ | RandomRBF | 1,000,000 | 10 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
+ | RandomTree | 1,000,000 | 10 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
+ | SEA | 1,000,000 | 3 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
+ | STAGGER | 1,000,000 | 3 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
+ | Sine | 1,000,000 | 4 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
+ | Text | 1,000,000 | 100 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
+ | Hyperplane | 1,000,000 | 10 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
+ | RandomRBFDrift | 1,000,000 | 10 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
 
 ### Experiment 5: Datasets
 Use any algorithm in `moa.classifiers` and [dataset](http://people.vcu.edu/~acano/ROSE/datasets.zip) from UCI / KEEL dataset repositories.
@@ -80,27 +76,28 @@ java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0-jar-with-dependencies.jar moa.Do
 
 | Dataset | Instances | Features | Classes |
 | -------- | ---: | ---: | ---: |
-| adult | 45222 | 14 | 2 |
-| airlines | 539383 | 7 | 2 |
-| bridges | 1000000 | 12 | 6 |
-| census | 299284 | 41 | 2 |
-| coil2000 | 9822 | 85 | 2 |
-| connect-4 | 67557 | 42 | 3 |
-| covtype | 581012 | 54 | 7 |
-| dj30 | 138166 | 7 | 30 |
-| electricity | 45312 | 8 | 2 |
-| fars | 100968 | 29 | 8 |
-| gas-sensor | 13910 | 128 | 6 |
-| gmsc | 150000 | 10 | 2 |
-| intel-lab | 2313153 | 5 | 58 |
-| kddcup | 4898431 | 41 | 23 |
-| kr-vs-k | 28056 | 6 | 18 |
-| letter | 20000 | 16 | 26 |
-| magic | 19020 | 10 | 2 |
-| nomao | 34465 | 118 | 2 |
-| penbased | 10992 | 16 | 10 |
-| poker | 829201 | 10 | 10 |
-| powersupply | 29928 | 2 | 24 |
-| shuttle | 57999 | 9 | 7 |
-| thyroid | 7200 | 21 | 3 |
-| zoo | 1000000 | 17 | 7 |
+ | adult | 45,222 | 14 | 2 | 
+ | airlines | 539,383 | 7 | 2 | 
+ | bridges | 1,000,000 | 12 | 6 | 
+ | census | 299,284 | 41 | 2 | 
+ | coil2000 | 9,822 | 85 | 2 | 
+ | connect-4 | 67,557 | 42 | 3 | 
+ | covtype | 581,012 | 54 | 7 | 
+ | dj30 | 138,166 | 7 | 30 | 
+ | electricity | 45,312 | 8 | 2 | 
+ | fars | 100,968 | 29 | 8 | 
+ | gas-sensor | 13,910 | 128 | 6 | 
+ | gmsc | 150,000 | 10 | 2 | 
+ | intel-lab | 2,313,153 | 5 | 58 | 
+ | kddcup | 4,898,431 | 41 | 23 | 
+ | kr-vs-k | 28,056 | 6 | 18 | 
+ | letter | 20,000 | 16 | 26 | 
+ | magic | 19,020 | 10 | 2 | 
+ | nomao | 34,465 | 118 | 2 | 
+ | penbased | 10,992 | 16 | 10 | 
+ | poker | 829,201 | 10 | 10 | 
+ | powersupply | 29,928 | 2 | 24 | 
+ | shuttle | 57,999 | 9 | 7 | 
+ | thyroid | 7,200 | 21 | 3 | 
+ | zoo | 1,000,000 | 17 | 7 | 
+
