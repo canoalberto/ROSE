@@ -6,7 +6,7 @@ Data streams are potentially unbounded collections of instances arriving over ti
 
 Download the pre-compiled `ROSE-1.0-jar-with-dependencies.jar` or import the project source code into [MOA](https://github.com/Waikato/moa)
 
-### Experiment 1: Fixed imbalance ratio
+### Experiment 1: Static imbalance ratio
 Use any algorithm in `moa.classifiers` and imbalanced generator in `moa.streams.generators.imbalanced`. The parameter `-m` controls the proportion of the minority vs majority class, e.g. `-m 0.01` reflects an imbalance ratio of 100.
 ```
 java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0-jar-with-dependencies.jar moa.DoTask EvaluatePrequential -e "(WindowImbalancedClassificationPerformanceEvaluator -w 1000)" -s "(moa.streams.generators.imbalanced.AgrawalGenerator -i 1 -f 1 -m 0.01)" -l "(moa.classifiers.meta.ROSE)" -i 1000000 -f 1000 -d results.csv
