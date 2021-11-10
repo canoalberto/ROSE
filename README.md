@@ -22,19 +22,19 @@ java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0-jar-with-dependencies.jar moa.Do
  | Hyperplane | 1,000,000 | 10 | 2 | {5, 10, 20, 50, 100} | None |
 
 ### Experiment 2: Drifting imbalance ratio
-Use any algorithm in `moa.classifiers` and imbalanced generator in `moa.streams.generators.imbalanced`. The parameter `-m` controls the proportion of the minority vs majority class, e.g. `-m 0.01` reflects an imbalance ratio of 100. Generate drifting imbalance ratios by chaining `ConceptDriftStream` streams with different imbalance ratios. The parameter `-p` controls the position of the drift and `-w` the width of the drift (sudden vs gradual). The example shows a sequence of increasing then decreasing imbalance ratio (5 - 10 - 20 - 100 - 20 - 10 - 5).
+Use any algorithm in `moa.classifiers` and imbalanced generator in `moa.streams.generators.imbalanced`. The parameter `-m` controls the proportion of the minority vs majority class, e.g. `-m 0.01` reflects an imbalance ratio of 100. Generate drifting imbalance ratios by chaining `ConceptDriftStream` streams with different imbalance ratios. The parameter `-p` controls the position of the drift and `-w` the width of the drift (sudden vs gradual). The example shows a sequence of increasing then decreasing imbalance ratio ({5, 10, 20, 100, 20, 10, 5}).
 ```
 java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0-jar-with-dependencies.jar moa.DoTask EvaluatePrequential -e "(WindowImbalancedClassificationPerformanceEvaluator -w 1000)" -s "(ConceptDriftStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 1 -f 2 -m 0.2) -r 1 -d (ConceptDriftStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 2 -f 2 -m 0.1) -r 2 -d (ConceptDriftStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 3 -f 2 -m 0.05) -r 3 -d (ConceptDriftStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 4 -f 2 -m 0.01) -r 4 -d (ConceptDriftStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 5 -f 2 -m 0.01) -r 5 -d (ConceptDriftStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 6 -f 2 -m 0.05) -r 6 -d (ConceptDriftStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 7 -f 2 -m 0.1) -r 7 -d (moa.streams.generators.imbalanced.AgrawalGenerator -i 8 -f 2 -m 0.2) -r 8 -p 125000 -w 1) -p 125000 -w 1) -p 125000 -w 1) -p 125000 -w 1) -p 125000 -w 1) -p 125000 -w 1) -p 125000 -w 1)" -l "(moa.classifiers.meta.ROSE)" -i 1000000 -f 1000 -d results.csv
 ```
 
  | Generator | Instances | Features | Classes | Drifting imbalance ratios | Concept Drift | 
  | -------- | ---: | ---: | ---: |:-: |:-: |
- | Agrawal | 1,000,000 | 9 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | 
- | AssetNegotiation | 1,000,000 | 5 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | 
- | RandomRBF | 1,000,000 | 10 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | 
- | SEA | 1,000,000 | 3 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | 
- | Sine | 1,000,000 | 4 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | 
- | Hyperplane | 1,000,000 | 10 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | 
+ | Agrawal | 1,000,000 | 9 | 2 | {5, 10, 20, 100, 20, 10, 5} | 8 drifts {sudden, gradual} | 
+ | AssetNegotiation | 1,000,000 | 5 | 2 | {5, 10, 20, 100, 20, 10, 5} | 8 drifts {sudden, gradual} | 
+ | RandomRBF | 1,000,000 | 10 | 2 | {5, 10, 20, 100, 20, 10, 5} | 8 drifts {sudden, gradual} | 
+ | SEA | 1,000,000 | 3 | 2 | {5, 10, 20, 100, 20, 10, 5} | 8 drifts {sudden, gradual} | 
+ | Sine | 1,000,000 | 4 | 2 | {5, 10, 20, 100, 20, 10, 5} | 8 drifts {sudden, gradual} | 
+ | Hyperplane | 1,000,000 | 10 | 2 | {5, 10, 20, 100, 20, 10, 5} | 8 drifts {sudden, gradual} | 
 
 ### Experiment 3: Instance-level difficulties
 Use any algorithm in `moa.classifiers` and [dataset for instance-level difficulties](http://people.vcu.edu/~acano/ROSE/datasets-instance-level.zip) generated using these [imbalanced generators](https://github.com/dabrze/imbalanced-stream-generator)
@@ -50,23 +50,23 @@ java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0-jar-with-dependencies.jar moa.Do
  | Borderline + Rare | 200,000 | 5 | 2 | {1, 10, 100} | {0%, 20%, 40%} | 
 
 ### Experiment 4: Robustness to noise drift
-Use any algorithm in `moa.classifiers` and imbalanced generator in `moa.streams.generators.imbalanced`. The parameter `-f` controls the percentage of features with noise. The parameter `-m` controls the proportion of the minority vs majority class, e.g. `-m 0.01` reflects an imbalance ratio of 100. Generate drifting noise and imbalance ratios by chaining `ConceptDriftStream` streams with different imbalance ratios, percentages of features with noise, and noise seed `-r`. The parameter `-p` controls the position of the drift and `-w` the width of the drift (sudden vs gradual). The example shows a sequence of drifting noise to other features and increasing then decreasing imbalance ratio (5 - 10 - 20 - 100 - 20 - 10 - 5).
+Use any algorithm in `moa.classifiers` and imbalanced generator in `moa.streams.generators.imbalanced`. The parameter `-f` controls the percentage of features with noise. The parameter `-m` controls the proportion of the minority vs majority class, e.g. `-m 0.01` reflects an imbalance ratio of 100. Generate drifting noise and imbalance ratios by chaining `ConceptDriftStream` streams with different imbalance ratios, percentages of features with noise, and noise seed `-r`. The parameter `-p` controls the position of the drift and `-w` the width of the drift (sudden vs gradual). The example shows a sequence of drifting noise to other features and increasing then decreasing imbalance ratio ({5, 10, 20, 100, 20, 10, 5}).
 ```
 java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0-jar-with-dependencies.jar moa.DoTask EvaluatePrequential -e "(WindowImbalancedClassificationPerformanceEvaluator -w 1000)" -s "(ConceptDriftStream -s (FilteredStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 1 -f 2 -m 0.2) -f (AddNoiseFilterFeatures -r 1 -a 0.99 -f 0.40)) -r 1 -d (ConceptDriftStream -s (FilteredStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 2 -f 2 -m 0.1) -f (AddNoiseFilterFeatures -r 2 -a 0.99 -f 0.40)) -r 2 -d (ConceptDriftStream -s (FilteredStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 3 -f 2 -m 0.05) -f (AddNoiseFilterFeatures -r 3 -a 0.99 -f 0.40)) -r 3 -d (ConceptDriftStream -s (FilteredStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 4 -f 2 -m 0.01) -f (AddNoiseFilterFeatures -r 4 -a 0.99 -f 0.40)) -r 4 -d (ConceptDriftStream -s (FilteredStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 5 -f 2 -m 0.01) -f (AddNoiseFilterFeatures -r 5 -a 0.99 -f 0.40)) -r 5 -d (ConceptDriftStream -s (FilteredStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 6 -f 2 -m 0.05) -f (AddNoiseFilterFeatures -r 6 -a 0.99 -f 0.40)) -r 6 -d (ConceptDriftStream -s (FilteredStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 7 -f 2 -m 0.1) -f (AddNoiseFilterFeatures -r 7 -a 0.99 -f 0.40)) -r 7 -d (FilteredStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 8 -f 2 -m 0.2) -f (AddNoiseFilterFeatures -r 8 -a 0.99 -f 0.40)) -r 8 -p 125000 -w 1) -p 125000 -w 1) -p 125000 -w 1) -p 125000 -w 1) -p 125000 -w 1) -p 125000 -w 1) -p 125000 -w 1)" -l "(moa.classifiers.meta.imbalanced.ROSE)" -i 1000000 -f 1000 -d results.csv
 ```
 
  | Generator | Instances | Features | Classes | Drifting imbalance ratios | Concept Drift | Percentage of features with noise
  | -------- | ---: | ---: | ---: |:-: |:-: | :-- |
- | Agrawal | 1,000,000 | 9 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
- | AssetNegotiation | 1,000,000 | 5 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
- | RandomRBF | 1,000,000 | 10 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
- | RandomTree | 1,000,000 | 10 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
- | SEA | 1,000,000 | 3 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
- | STAGGER | 1,000,000 | 3 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
- | Sine | 1,000,000 | 4 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
- | Text | 1,000,000 | 100 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
- | Hyperplane | 1,000,000 | 10 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
- | RandomRBFDrift | 1,000,000 | 10 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
+ | Agrawal | 1,000,000 | 9 | 2 | {5, 10, 20, 100, 20, 10, 5} | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
+ | AssetNegotiation | 1,000,000 | 5 | 2 | {5, 10, 20, 100, 20, 10, 5} | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
+ | RandomRBF | 1,000,000 | 10 | 2 | {5, 10, 20, 100, 20, 10, 5} | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
+ | RandomTree | 1,000,000 | 10 | 2 | {5, 10, 20, 100, 20, 10, 5} | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
+ | SEA | 1,000,000 | 3 | 2 | {5, 10, 20, 100, 20, 10, 5} | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
+ | STAGGER | 1,000,000 | 3 | 2 | {5, 10, 20, 100, 20, 10, 5} | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
+ | Sine | 1,000,000 | 4 | 2 | {5, 10, 20, 100, 20, 10, 5} | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
+ | Text | 1,000,000 | 100 | 2 | {5, 10, 20, 100, 20, 10, 5} | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
+ | Hyperplane | 1,000,000 | 10 | 2 | {5, 10, 20, 100, 20, 10, 5} | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
+ | RandomRBFDrift | 1,000,000 | 10 | 2 | {5, 10, 20, 100, 20, 10, 5} | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
 
 ### Experiment 5: Datasets
 Use any algorithm in `moa.classifiers` and [dataset](http://people.vcu.edu/~acano/ROSE/datasets.zip) from UCI / KEEL dataset repositories.
