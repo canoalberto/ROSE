@@ -45,9 +45,9 @@ java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0-jar-with-dependencies.jar moa.Do
 
  | Generator | Instances | Features | Classes | Static Imbalance Ratios | Percentage of difficult instances | 
  | -------- | ---: | ---: | ---: |:-: |:-- |
- | Borderline | 200,000 | 5 | 2 | {1, 10, 100} | {0%, 20%, 40%, 60%, 80%, 100%} | 
- | Rare | 200,000 | 5 | 2 | {1, 10, 100} | {0%, 20%, 40%, 60%, 80%, 100%} | 
- | Borderline + Rare | 200,000 | 5 | 2 | {1, 10, 100} | {0%, 20%, 40%} | 
+ | Borderline | 200,000 | 5 | 2 | {1, 10, 100} | {20%, 40%, 60%, 80%, 100%} | 
+ | Rare | 200,000 | 5 | 2 | {1, 10, 100} | {20%, 40%, 60%, 80%, 100%} | 
+ | Borderline + Rare | 200,000 | 5 | 2 | {1, 10, 100} | {20%, 40%} | 
 
 ### Experiment 4: Robustness to noise drift
 Use any algorithm in `moa.classifiers` and imbalanced generator in `moa.streams.generators.imbalanced`. The parameter `-f` controls the percentage of features with noise. The parameter `-m` controls the proportion of the minority vs majority class, e.g. `-m 0.01` reflects an imbalance ratio of 100. Generate drifting noise and imbalance ratios by chaining `ConceptDriftStream` streams with different imbalance ratios, percentages of features with noise, and noise seed `-r`. The parameter `-p` controls the position of the drift and `-w` the width of the drift (sudden vs gradual). The example shows a sequence of drifting noise to other features and increasing then decreasing imbalance ratio ({5, 10, 20, 100, 20, 10, 5}).
