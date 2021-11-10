@@ -68,7 +68,7 @@ java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0-jar-with-dependencies.jar moa.Do
  | SEA | 1,000,000 | 3 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | {0%, 10%, 20%, 30%, 40%}
  | STAGGER | 1,000,000 | 3 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | {0%, 10%, 20%, 30%, 40%}
  | Sine | 1,000,000 | 4 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | {0%, 10%, 20%, 30%, 40%}
- | Text | 1,000,000 | 1,000 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | {0%, 10%, 20%, 30%, 40%}
+ | Text | 1,000,000 | 100 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | {0%, 10%, 20%, 30%, 40%}
  | Hyperplane | 1,000,000 | 10 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | {0%, 10%, 20%, 30%, 40%}
  | RandomRBFDrift | 1,000,000 | 10 | 2 | 5 - 10 - 20 - 100 - 20 - 10 - 5 | 8 drifts: sudden / gradual | {0%, 10%, 20%, 30%, 40%}
 
