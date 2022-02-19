@@ -37,7 +37,7 @@ java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0-jar-with-dependencies.jar moa.Do
  | Hyperplane | 1,000,000 | 10 | 2 | {5, 10, 20, 100, 20, 10, 5} | 8 drifts {sudden, gradual} | 
 
 ### Experiment 3: Instance-level difficulties
-Use any algorithm in `moa.classifiers` and [dataset for instance-level difficulties](http://people.vcu.edu/~acano/ROSE/datasets-instance-level.zip) generated using these [imbalanced generators](https://github.com/dabrze/imbalanced-stream-generator)
+Use any algorithm in `moa.classifiers` and <a href="http://people.vcu.edu/~acano/ROSE/datasets-instance-level.zip">dataset for instance-level difficulties<a/> generated using these <a href="https://github.com/dabrze/imbalanced-stream-generator">imbalanced generators</a>
 
 ```
 java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0-jar-with-dependencies.jar moa.DoTask EvaluatePrequential -e "(WindowImbalancedClassificationPerformanceEvaluator -w 100)" -s "(ArffFileStream -f Split5+Im1+Borderline20+Rare20.arff)" -l "(moa.classifiers.meta.OSAKUE_20200935_t99_scaleacckappa)" -f 100 -d EvaluatePrequential-ARFF-dariusz/prime/moa.classifiers.meta.OSAKUE_20200935_t99_scaleacckappa-Split5+Im1+Borderline20+Rare20.csv
@@ -65,7 +65,7 @@ java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0-jar-with-dependencies.jar moa.Do
  | Hyperplane | 1,000,000 | 10 | 2 | {5, 10, 20, 100, 20, 10, 5} | 8 drifts {sudden, gradual} | {10%, 20%, 30%, 40%}
 
 ### Experiment 5: Datasets
-Use any algorithm in `moa.classifiers` and [dataset](http://people.vcu.edu/~acano/ROSE/datasets.zip) from UCI / KEEL dataset repositories.
+Use any algorithm in `moa.classifiers` and <a href="http://people.vcu.edu/~acano/ROSE/datasets.zip">dataset</a> from UCI / KEEL dataset repositories.
 ```
 java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0-jar-with-dependencies.jar moa.DoTask EvaluatePrequential -e "(WindowClassificationPerformanceEvaluator)" -s "(ArffFileStream -f dataset.arff)" -l "(moa.classifiers.meta.ROSE)" -f 1000 -d results.csv
 ```
