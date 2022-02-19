@@ -11,6 +11,7 @@ public class Instance_Level_Difficulties {
 		// Splitting into 5 clusters and evaluating the impact of percentage of borderline and rare instances
 
 		String[] datasets = new String[] {
+				// IR 1
 				"Split5",
 				"Split5+Rare20",
 				"Split5+Rare40",
@@ -25,6 +26,7 @@ public class Instance_Level_Difficulties {
 				"Split5+Borderline20+Rare20",
 				"Split5+Borderline40+Rare40",
 
+				// IR 10
 				"Split5+Im10",
 				"Split5+Im10+Rare20",
 				"Split5+Im10+Rare40",
@@ -39,6 +41,7 @@ public class Instance_Level_Difficulties {
 				"Split5+Im10+Borderline20+Rare20",
 				"Split5+Im10+Borderline40+Rare40",
 
+				// IR 100
 				"Split5+Im1",
 				"Split5+Im1+Rare20",
 				"Split5+Im1+Rare40",
