@@ -81,14 +81,13 @@ public class Datasets {
 		{
 			for(int alg = 0; alg < algorithms.length; alg++)
 			{
-				// Replace 
-					System.out.println("java -Xms16g -Xmx1024g -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0.jar" + classpathSeparator + "MOA-dependencies.jar "
-							+ "moa.DoTask EvaluatePrequential"
-							+ " -e \"(WindowImbalancedClassificationPerformanceEvaluator)\""
-							+ " -s \"(ArffFileStream -f datasets/" + datasets[dat] + ".arff)\"" 
-							+ " -l \"(" + algorithms[alg] + ")\""
-							+ " -f 1000"
-							+ " -d results_datasets/" + algorithmsFilename[alg] + "-" + datasets[dat] + ".csv");
+				System.out.println("java -Xms16g -Xmx1024g -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0.jar" + classpathSeparator + "MOA-dependencies.jar "
+						+ "moa.DoTask EvaluatePrequential"
+						+ " -e \"(WindowAUCMultiClassImbalancedPerformanceEvaluator)\""
+						+ " -s \"(ArffFileStream -f datasets/" + datasets[dat] + ".arff)\"" 
+						+ " -l \"(" + algorithms[alg] + ")\""
+						+ " -f 1000"
+						+ " -d results_datasets/" + algorithmsFilename[alg] + "-" + datasets[dat] + ".csv");
 			}
 		}
 	}

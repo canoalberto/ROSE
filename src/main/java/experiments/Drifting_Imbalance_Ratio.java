@@ -255,7 +255,7 @@ public class Drifting_Imbalance_Ratio {
 				// Replace 
 					System.out.println("java -Xms16g -Xmx1024g -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0.jar" + classpathSeparator + "MOA-dependencies.jar "
 							+ "moa.DoTask EvaluatePrequential"
-							+ " -e \"(WindowImbalancedClassificationPerformanceEvaluator)\""
+							+ " -e \"(WindowAUCImbalancedPerformanceEvaluator)\""
 							+ " -s \"(" + generators[gen] + ")\"" 
 							+ " -l \"(" + algorithms[alg] + ")\""
 							+ " -f 1000"
