@@ -40,7 +40,7 @@ java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0.jar:MOA-dependencies.jar moa.DoT
 Use any algorithm in `moa.classifiers` and <a href="https://people.vcu.edu/~acano/ROSE/datasets-instance-level.zip">dataset for instance-level difficulties<a/> generated using these <a href="https://github.com/dabrze/imbalanced-stream-generator">imbalanced generators</a>
 
 ```
-java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0.jar:MOA-dependencies.jar moa.DoTask EvaluateInterleavedTestThenTrain -e "(WindowAUCImbalancedPerformanceEvaluator -w 100)" -s "(ArffFileStream -f Split5+Im1+Borderline20+Rare20.arff)" -l "(moa.classifiers.meta.OSAKUE_20200935_t99_scaleacckappa)" -f 500 -d EvaluateInterleavedTestThenTrain-ARFF-dariusz/prime/moa.classifiers.meta.OSAKUE_20200935_t99_scaleacckappa-Split5+Im1+Borderline20+Rare20.csv
+java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0.jar:MOA-dependencies.jar moa.DoTask EvaluateInterleavedTestThenTrain -e "(WindowAUCImbalancedPerformanceEvaluator)" -s "(ArffFileStream -f Split5+Im1+Borderline20+Rare20.arff)" -l "(moa.classifiers.meta.OSAKUE_20200935_t99_scaleacckappa)" -f 500 -d EvaluateInterleavedTestThenTrain-ARFF-dariusz/prime/moa.classifiers.meta.OSAKUE_20200935_t99_scaleacckappa-Split5+Im1+Borderline20+Rare20.csv
 ```
 
  | Generator | Instances | Features | Classes | Static Imbalance Ratios | Percentage of difficult instances | 
