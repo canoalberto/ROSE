@@ -9,7 +9,7 @@ Download the pre-compiled jar files or import the project source code into [MOA]
 ### Experiment 1: Static imbalance ratio
 Use any algorithm in `moa.classifiers` and imbalanced generator in `moa.streams.generators.imbalanced`. The parameter `-m` controls the proportion of the minority vs majority class, e.g. `-m 0.01` reflects an imbalance ratio of 100.
 ```
-java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0.jar:MOA-dependencies.jar moa.DoTask EvaluateInterleavedTestThenTrain -e "(WindowAUCImbalancedPerformanceEvaluator)" -s "(moa.streams.generators.imbalanced.AgrawalGenerator -i 1 -f 1 -m 0.01)" -l "(moa.classifiers.meta.ROSE)" -i 1000000 -f 500 -d results.csv
+java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0.jar:MOA-dependencies.jar moa.DoTask EvaluateInterleavedTestThenTrain -e "(WindowAUCImbalancedPerformanceEvaluator)" -s "(moa.streams.generators.imbalanced.AgrawalGenerator -i 1 -f 1 -m 0.01)" -l "(moa.classifiers.meta.imbalanced.ROSE)" -i 1000000 -f 500 -d results.csv
 ```
 
  | Generator | Instances | Features | Classes | Static Imbalance Ratios | Concept Drift | 
@@ -24,7 +24,7 @@ java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0.jar:MOA-dependencies.jar moa.DoT
 ### Experiment 2: Drifting imbalance ratio
 Use any algorithm in `moa.classifiers` and imbalanced generator in `moa.streams.generators.imbalanced`. The parameter `-m` controls the proportion of the minority vs majority class, e.g. `-m 0.01` reflects an imbalance ratio of 100. Generate drifting imbalance ratios by chaining `ConceptDriftStream` streams with different imbalance ratios. The parameter `-p` controls the position of the drift and `-w` the width of the drift (sudden vs gradual). The example shows a sequence of increasing then decreasing imbalance ratio ({5, 10, 20, 100, 20, 10, 5}).
 ```
-java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0.jar:MOA-dependencies.jar moa.DoTask EvaluateInterleavedTestThenTrain -e "(WindowAUCImbalancedPerformanceEvaluator)" -s "(ConceptDriftStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 1 -f 2 -m 0.2) -r 1 -d (ConceptDriftStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 2 -f 2 -m 0.1) -r 2 -d (ConceptDriftStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 3 -f 2 -m 0.05) -r 3 -d (ConceptDriftStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 4 -f 2 -m 0.01) -r 4 -d (ConceptDriftStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 5 -f 2 -m 0.01) -r 5 -d (ConceptDriftStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 6 -f 2 -m 0.05) -r 6 -d (ConceptDriftStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 7 -f 2 -m 0.1) -r 7 -d (moa.streams.generators.imbalanced.AgrawalGenerator -i 8 -f 2 -m 0.2) -r 8 -p 125000 -w 1) -p 125000 -w 1) -p 125000 -w 1) -p 125000 -w 1) -p 125000 -w 1) -p 125000 -w 1) -p 125000 -w 1)" -l "(moa.classifiers.meta.ROSE)" -i 1000000 -f 500 -d results.csv
+java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0.jar:MOA-dependencies.jar moa.DoTask EvaluateInterleavedTestThenTrain -e "(WindowAUCImbalancedPerformanceEvaluator)" -s "(ConceptDriftStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 1 -f 2 -m 0.2) -r 1 -d (ConceptDriftStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 2 -f 2 -m 0.1) -r 2 -d (ConceptDriftStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 3 -f 2 -m 0.05) -r 3 -d (ConceptDriftStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 4 -f 2 -m 0.01) -r 4 -d (ConceptDriftStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 5 -f 2 -m 0.01) -r 5 -d (ConceptDriftStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 6 -f 2 -m 0.05) -r 6 -d (ConceptDriftStream -s (moa.streams.generators.imbalanced.AgrawalGenerator -i 7 -f 2 -m 0.1) -r 7 -d (moa.streams.generators.imbalanced.AgrawalGenerator -i 8 -f 2 -m 0.2) -r 8 -p 125000 -w 1) -p 125000 -w 1) -p 125000 -w 1) -p 125000 -w 1) -p 125000 -w 1) -p 125000 -w 1) -p 125000 -w 1)" -l "(moa.classifiers.meta.imbalanced.ROSE)" -i 1000000 -f 500 -d results.csv
 ```
 
  | Generator | Instances | Features | Classes | Drifting imbalance ratios | Concept Drift | 
@@ -67,7 +67,7 @@ java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0.jar:MOA-dependencies.jar moa.DoT
 ### Experiment 5: Datasets
 Use any algorithm in `moa.classifiers` and <a href="https://people.vcu.edu/~acano/ROSE/datasets.zip">dataset</a> from UCI / KEEL dataset repositories.
 ```
-java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0.jar:MOA-dependencies.jar moa.DoTask EvaluateInterleavedTestThenTrain -e "(WindowAUCMultiClassImbalancedPerformanceEvaluator)" -s "(ArffFileStream -f dataset.arff)" -l "(moa.classifiers.meta.ROSE)" -f 500 -d results.csv
+java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0.jar:MOA-dependencies.jar moa.DoTask EvaluateInterleavedTestThenTrain -e "(WindowAUCMultiClassImbalancedPerformanceEvaluator)" -s "(ArffFileStream -f dataset.arff)" -l "(moa.classifiers.meta.imbalanced.ROSE)" -f 500 -d results.csv
 ```
 
 | Dataset | Instances | Features | Classes |
