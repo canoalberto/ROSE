@@ -80,7 +80,8 @@ public class Collect_Results {
 
 		metric("Accuracy", "averaged", resultsPath, files, algorithmsFilename);
 		metric("Kappa", "averaged", resultsPath,files, algorithmsFilename);
-		metric("AUC", "averaged", resultsPath, files, algorithmsFilename);
+		metric("AUC", "averaged", resultsPath, files, algorithmsFilename); // do not use for multi-class datasets
+		metric("PMAUC", "averaged", resultsPath, files, algorithmsFilename); // use for multi-class datasets
 	}
 
 	private static void metric(String metricName, String outcome, String resultsPath, String[] files, String[] algorithms) throws Exception {
@@ -124,8 +125,6 @@ public class Collect_Results {
 						if(columns[i].equals(metricName))
 							index = i;
 
-					line = br.readLine(); // first chunk (?)
-
 					while((line = br.readLine()) != null)
 					{
 						try {
@@ -136,8 +135,9 @@ public class Collect_Results {
 								count++;
 							}
 						} catch (Exception e) {
-							e.printStackTrace();
-							System.exit(-1);
+							lastValue = 0;
+							sum += lastValue;
+							count++;
 						}
 					}
 

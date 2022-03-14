@@ -43,11 +43,13 @@ public class ROSE extends AbstractClassifier implements MultiClassClassifier, Ca
 
 	public ClassOption warningDetectionMethodOption = new ClassOption("warningDetectionMethod", 'p', "Change detector for warnings (start training bkg learner)", ChangeDetector.class, "ADWINChangeDetector -a 1.0E-4");
 
+	public IntOption featureSpaceOption = new IntOption("feature", 'f', "The feature space to employ {1: uniform distribution with at last 50% of features; 2: normal distribution based on percentageFeaturesMean (70% default)}.", 1, 1, 2);
+
 	public FloatOption percentageFeaturesMean = new FloatOption("percentageFeaturesMean", 'm', "Mean for percentage of featues selected", 0.7, 0, 1);
 
 	public FloatOption theta = new FloatOption("theta", 't', "The time decay factor for class size.", 0.99, 0, 1);
 	
-	public IntOption windowSizeOption = new IntOption("window", 'w', "The number of instances in the sliding window.", 1000, 1, Integer.MAX_VALUE);
+	public IntOption windowSizeOption = new IntOption("window", 'w', "The number of instances in the sliding window.", 500, 1, Integer.MAX_VALUE);	
 
 	protected ROSEBaseLearner[] ensemble;
 	protected ROSEBaseLearner[] ensembleBackground;
@@ -116,7 +118,14 @@ public class ROSE extends AbstractClassifier implements MultiClassClassifier, Ca
 				WindowImbalancedClassificationPerformanceEvaluator classificationEvaluator = new WindowImbalancedClassificationPerformanceEvaluator();
 
 				for(int i = 0; i < this.ensembleSizeOption.getValue(); i++) {
-					int subspaceSize = (int) Math.round(this.percentageFeaturesMean.getValue() * numberAttributes + ((1.0 - this.percentageFeaturesMean.getValue()) * numberAttributes) * this.classifierRandom.nextGaussian() * 0.5);
+					
+					int subspaceSize = -1;
+					
+					if(featureSpaceOption.getValue() == 1) {
+						subspaceSize = 1 + (int) Math.floor(numberAttributes/2) + this.classifierRandom.nextInt((int)Math.ceil(numberAttributes/2));
+					} else if(featureSpaceOption.getValue() == 2) {
+						subspaceSize = (int) Math.round(this.percentageFeaturesMean.getValue() * numberAttributes + ((1.0 - this.percentageFeaturesMean.getValue()) * numberAttributes) * this.classifierRandom.nextGaussian() * 0.5);
+					}
 
 					if (subspaceSize > numberAttributes) {
 						subspaceSize = numberAttributes;
@@ -308,8 +317,14 @@ public class ROSE extends AbstractClassifier implements MultiClassClassifier, Ca
 
 		// Primary ensemble
 		for(int i = 0; i < ensembleSize; i++) {
-			int subspaceSize = (int) Math.round(this.percentageFeaturesMean.getValue() * numberAttributes + ((1.0 - this.percentageFeaturesMean.getValue()) * numberAttributes) * this.classifierRandom.nextGaussian() * 0.5);
-
+			int subspaceSize = -1;
+			
+			if(featureSpaceOption.getValue() == 1) {
+				subspaceSize = 1 + (int) Math.floor(numberAttributes/2) + this.classifierRandom.nextInt((int)Math.ceil(numberAttributes/2));
+			} else if(featureSpaceOption.getValue() == 2) {
+				subspaceSize = (int) Math.round(this.percentageFeaturesMean.getValue() * numberAttributes + ((1.0 - this.percentageFeaturesMean.getValue()) * numberAttributes) * this.classifierRandom.nextGaussian() * 0.5);
+			}
+			
 			if (subspaceSize > numberAttributes) {
 				subspaceSize = numberAttributes;
 			} else if (subspaceSize <= 0) {
@@ -330,8 +345,14 @@ public class ROSE extends AbstractClassifier implements MultiClassClassifier, Ca
 
 		// Background ensemble
 		for(int i = 0; i < this.ensembleSizeOption.getValue(); i++) {
-			int subspaceSize = (int) Math.round(this.percentageFeaturesMean.getValue() * numberAttributes + ((1.0 - this.percentageFeaturesMean.getValue()) * numberAttributes) * this.classifierRandom.nextGaussian() * 0.5);
-
+			int subspaceSize = -1;
+			
+			if(featureSpaceOption.getValue() == 1) {
+				subspaceSize = 1 + (int) Math.floor(numberAttributes/2) + this.classifierRandom.nextInt((int)Math.ceil(numberAttributes/2));
+			} else if(featureSpaceOption.getValue() == 2) {
+				subspaceSize = (int) Math.round(this.percentageFeaturesMean.getValue() * numberAttributes + ((1.0 - this.percentageFeaturesMean.getValue()) * numberAttributes) * this.classifierRandom.nextGaussian() * 0.5);
+			}
+			
 			if (subspaceSize > numberAttributes) {
 				subspaceSize = numberAttributes;
 			} else if (subspaceSize <= 0) {

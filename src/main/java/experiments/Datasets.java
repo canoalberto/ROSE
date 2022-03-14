@@ -81,12 +81,13 @@ public class Datasets {
 		{
 			for(int alg = 0; alg < algorithms.length; alg++)
 			{
+				// Replace evaluator with WindowAUCMultiClassImbalancedPerformanceEvaluator for multi-class datasets
 				System.out.println("java -Xms16g -Xmx1024g -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0.jar" + classpathSeparator + "MOA-dependencies.jar "
-						+ "moa.DoTask EvaluatePrequential"
+						+ "moa.DoTask EvaluateInterleavedTestThenTrain"
 						+ " -e \"(WindowAUCMultiClassImbalancedPerformanceEvaluator)\""
 						+ " -s \"(ArffFileStream -f datasets/" + datasets[dat] + ".arff)\"" 
 						+ " -l \"(" + algorithms[alg] + ")\""
-						+ " -f 1000"
+						+ " -f 500"
 						+ " -d results_datasets/" + algorithmsFilename[alg] + "-" + datasets[dat] + ".csv");
 			}
 		}
