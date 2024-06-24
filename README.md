@@ -97,3 +97,15 @@ java -javaagent:sizeofag-1.0.4.jar -cp ROSE-1.0.jar:MOA-dependencies.jar moa.DoT
  | thyroid | 7,200 | 21 | 3 | 
  | zoo | 1,000,000 | 17 | 7 | 
 
+## Citation
+```
+@article{cano2022rose,
+  title={{ROSE: robust online self-adjusting ensemble for continual learning on imbalanced drifting data streams}},
+  author={Cano, Alberto and Krawczyk, Bartosz},
+  journal={Machine Learning},
+  volume={111},
+  number={7},
+  pages={2561--2599},
+  year={2022}
+}
+```
